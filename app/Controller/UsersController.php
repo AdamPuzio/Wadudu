@@ -11,7 +11,7 @@ class UsersController extends AppController {
 		Security::setHash('md5');
 		$username = '';
 		$password = '';
-		if ($this->request->is('post')) {
+		if ($this->request && $this->request->is('post')) {
 			if ($this->Auth->login()) {
 				$this->redirect($this->Auth->redirect());
 			} else {

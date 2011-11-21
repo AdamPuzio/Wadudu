@@ -41,4 +41,38 @@
  * Load the CakePHP default routes. Remove this if you do not want to use
  * the built-in default routes.
  */
+	
+	
+	Router::connect('/login', array('controller' => 'users', 'action' => 'login'));
+	Router::connect('/logout', array('controller' => 'users', 'action' => 'logout'));
+	
+	
+	if(Configure::read('App.multi_company')){
+		Router::connect(
+			'/:company_name'
+			, array('controller' => 'companies', 'action' => 'index')
+			//, array('sale_id' => '[0-9]+', 'product_id' => '[0-9]+')
+		);
+		Router::connect(
+			'/:company_name/:project_name'
+			, array('controller' => 'projects', 'action' => 'index')
+			//, array('sale_id' => '[0-9]+', 'product_id' => '[0-9]+')
+		);
+		Router::connect(
+			'/:company_name/:project_name/:ticket_id'
+			, array('controller' => 'tickets', 'action' => 'index')
+			, array('ticket_id' => '[0-9]+')
+		);
+	}else{
+		Router::connect(
+			'/:project_name'
+			, array('controller' => 'projects', 'action' => 'index')
+		);
+		Router::connect(
+			'/:project_name/:issue_id'
+			, array('controller' => 'tickets', 'action' => 'index')
+			, array('ticket_id' => '[0-9]+')
+		);
+	}
+	
 	require CAKE . 'Config' . DS . 'routes.php';
