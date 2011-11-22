@@ -5,3 +5,6 @@
 /vendors
 .DS_Store
 tags
+.buildpath
+.project
+.settings
