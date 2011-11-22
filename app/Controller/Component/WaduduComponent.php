@@ -35,7 +35,22 @@ class WaduduComponent extends Component {
 		}
 		$company = $this->Company->find('first', array(
 			'conditions' => array('Company.' . $field => $value)
+			, 'contain' => array()
 		));
 		return $company;
+	}
+	
+	public function determineProject(){
+		$projectName = $this->controller->params['project_name'];
+		$company = $this->determineCompany();
+		$projectName = $this->controller->params['project_name'];
+		$project = $this->Company->Project->find('first', array(
+			'conditions' => array(
+				'Project.code' => $projectName
+				, 'Project.company_id' => $company['Company']['id']
+			)
+			, 'contain' => array()
+		));
+		return $project;
 	}
 }

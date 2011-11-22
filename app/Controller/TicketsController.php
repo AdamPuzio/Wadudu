@@ -27,8 +27,11 @@ class TicketsController extends AppController {
 	}
 
 	function index() {
-		$companyName = $this->params['company_name'];
+		//$companyName = $this->params['company_name'];
+		$Company = $this->Wadudu->determineCompany();
 		$projectName = $this->params['project_name'];
-		die("Company Name: $companyName<br />Project Name: $projectName");
+		$Project = $this->Wadudu->determineProject();
+		//die("Company Name: $companyName<br />Project Name: $projectName");
+		$this->set(compact('projectName', 'Company', 'Project'));
 	}
 }
