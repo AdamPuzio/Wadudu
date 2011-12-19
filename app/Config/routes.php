@@ -69,7 +69,7 @@
 			, array('controller' => 'projects', 'action' => 'index')
 		);
 		Router::connect(
-			'/:project_name/:issue_id'
+			'/:project_name/:ticket_id'
 			, array('controller' => 'tickets', 'action' => 'index')
 			, array('ticket_id' => '[0-9]+')
 		);

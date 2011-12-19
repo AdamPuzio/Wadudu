@@ -31,7 +31,17 @@ class TicketsController extends AppController {
 		$Company = $this->Wadudu->determineCompany();
 		$projectName = $this->params['project_name'];
 		$Project = $this->Wadudu->determineProject();
-		//die("Company Name: $companyName<br />Project Name: $projectName");
-		$this->set(compact('projectName', 'Company', 'Project'));
+		$ticketId = $this->params['ticket_id'];
+		$Ticket = $this->Ticket->find('first', array(
+			'conditions' => array(
+				'Ticket.id' => $ticketId
+				, 'Ticket.project_id' => $Project['Project']['id']
+			)
+			, 'contain' => array(
+				'Reporter', 'Assignee', 'Project', 'TicketType'
+				, 'Comment' => array('User')
+			)
+		));
+		$this->set(compact('projectName', 'Company', 'Project', 'Ticket'));
 	}
 }

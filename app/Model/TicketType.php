@@ -1,6 +1,6 @@
 <?php
 /**
- * Ticket Model
+ * TicketType Model
  *
  * Wadudu
  * Copyright 2011
@@ -12,19 +12,19 @@
  */
 
 /**
- * Ticket Model
+ * TicketType Model
  *
  * @package       wadudu
  * @subpackage    wadudu.cake.libs.model
  */
-class Ticket extends AppModel {
+class TicketType extends AppModel {
 /**
  * Name
  * 
  * @var string
  * @access public
  */
-	var $name = 'Ticket';
+	var $name = 'TicketType';
 	
 /*
 * Associations
@@ -36,7 +36,7 @@ class Ticket extends AppModel {
  * @access public
  */	
 	var $hasMany = array(
-		'Comment'
+		'Ticket'
 	);
 	
 /**
@@ -46,16 +46,7 @@ class Ticket extends AppModel {
  * @access public
  */	
 	var $belongsTo = array(
-		'Project'
-		, 'TicketType'
-		, 'Reporter' => array(
-			'className' => 'User'
-			, 'foreignKey' => 'reporter_id'
-		)
-		, 'Assignee' => array(
-			'className' => 'User'
-			, 'foreignKey' => 'assignee_id'
-		)
+		
 	);
 	
 /**
