@@ -25,7 +25,7 @@ class WaduduComponent extends Component {
 		$this->Company = ClassRegistry::init('Company');
 	}
 	
-	public function determineCompany(){
+	public function determineCompany($fld=false){
 		if(Configure::read('App.multi_company')){
 			$field = 'name';
 			$value = $this->controller->params['company_name'];
@@ -37,6 +37,9 @@ class WaduduComponent extends Component {
 			'conditions' => array('Company.' . $field => $value)
 			, 'contain' => array()
 		));
+		if($fld !== false){
+			return $company['Company'][$fld];
+		}
 		return $company;
 	}
 	
@@ -52,5 +55,37 @@ class WaduduComponent extends Component {
 			, 'contain' => array()
 		));
 		return $project;
+	}
+	
+	public function buildUrl($company=false, $project=false, $ticket=false){
+		$url = array();
+		if(Configure::read('App.multi_company')){
+			if(!$company){
+				$company = $this->determineCompany('code');
+			}
+			$url[] = $company;
+		}
+		if($project){
+			$url[] = $project;
+		}
+		if($ticket){
+			$url[] = $ticket;
+		}
+		
+		$url = FULL_BASE_URL . '/' . implode('/', $url);
+		return $url;
+	}
+	
+	public function buildTicketUrl($ticketId, $project=false, $company=false){
+		$url = '/';
+		$Company = $this->determineCompany();
+		$projectName = $this->params['project_name'];
+		$Project = $this->determineProject();
+		if(Configure::read('App.multi_company')){
+			$url .= $Company['Company']['name'] . '/';
+		}
+		$url .= $Project['Project']['code'] . '/';
+		$url .= $ticketId;
+		return $url;
 	}
 }

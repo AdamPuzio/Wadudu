@@ -1,0 +1,55 @@
+
+#taginput {
+	height: 30px;
+	width: 300px;
+	font-size: 20px;
+	float: left;
+	margin-left: 10px;
+}
+ul#taglist {
+	list-style: none;
+	margin-left: 10px;
+	padding: 0;
+}
+li.tag {
+	float: left;
+	margin: 5px 10px 5px 5px;
+	background: #fbfbfb;
+	color: #383838;
+	padding: 5px;
+	word-wrap: break-word;
+}
+li.tag .close {
+	cursor: pointer;
+}
+.close, .tag {
+	
+}
+.close {
+	color: #e07b7b;
+	font-weight: 700; 
+}
+.close img {
+	float: left;
+	margin-right: 5px;
+	padding-top: 2px; 
+}
+#counter {
+	font-size: 20px;
+	font-weight: bold;
+	padding: 5px 10px; 
+	float: left;
+}
+
+ul.ticket_states {
+	list-style: none;
+	margin: 0 0 0 10px;
+	padding: 0;
+}
+ul.ticket_states li {
+	float: left;
+	margin: 5px 10px 5px 5px;
+}
+ul.ticket_states li.current {
+	font-weight: bold;
+}

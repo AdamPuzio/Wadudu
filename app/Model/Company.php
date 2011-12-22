@@ -70,4 +70,16 @@ class Company extends AppModel {
 	var $validate = array(
 		
 	);
+	
+	public function getProjects($companyId){
+		$projects = $this->Project->find('all', array(
+			'conditions' => array(
+				'Project.company_id' => $companyId
+			)
+			, 'contain' => array(
+			
+			)
+		));
+		return $projects;
+	}
 }

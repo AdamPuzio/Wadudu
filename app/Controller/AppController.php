@@ -13,8 +13,10 @@ class AppController extends Controller {
 		)
 	);
 
-	function beforeFilter() {
-		
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$this->User = ClassRegistry::init('User');
+		$this->User->UserId = $this->UserId = $this->Auth->User('id');
 	}
     
 }

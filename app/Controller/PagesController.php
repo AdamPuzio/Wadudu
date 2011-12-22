@@ -19,15 +19,23 @@
  */
 class PagesController extends AppController {
 	var $name = 'Pages';
-	var $uses = array();	// No Model
+	var $uses = array('Company');
 	var $components = array('Wadudu');
 
-	function beforeFilter() {
+	public function beforeFilter() {
 		parent::beforeFilter();
 	}
 
-	function home() {
-		
+	public function home() {
+		if(Configure::read('App.multi_company')){
+			// Multi-Company, so show companies
+			$this->set('Projects', false);
+		}else{
+			// Single Company, so show projects
+			$company = $this->Wadudu->determineCompany();
+			$projects = $this->Company->getProjects($company['Company']['id']);
+			$this->set('Projects', $projects);
+		}
 	}
 	
 	public function display(){

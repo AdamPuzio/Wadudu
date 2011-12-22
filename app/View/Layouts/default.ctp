@@ -1,17 +1,21 @@
-<?php 
-$js = "/js/";
-$ext = "/js/ext-4.0.2a/";
-$bugz = '/js/wadudu/';
-?><html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title id="page-title"><?=$title_for_layout;?></title>
-
-    <link rel="stylesheet" type="text/css" href="<?=$ext?>resources/css/ext-all.css" />
-    <script type="text/javascript" src="<?=$ext?>ext-debug.js"></script>
-    <script type="text/javascript" src="<?=$bugz?>app.js"></script>
+<title><?=$title_for_layout?></title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="<?=FULL_BASE_URL?>/css/style.css" rel="stylesheet" type="text/css" />
+<link href="<?=FULL_BASE_URL?>/css/wadudu.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="<?=FULL_BASE_URL?>/js/jquery/jquery-1.7.1.min.js"></script>
+<!--<script type="text/javascript" src="<?=FULL_BASE_URL?>/js/jquery/jquery.quicktag.min.js"></script>-->
 </head>
 <body>
-<?=$content_for_layout; ?>
+<div class="main">
+	<?=$this->element('header')?>
+	<div class="body">
+	<?=$content_for_layout?>
+	</div>
+	<div class="clr"></div>
+</div>
+<?=$this->element('footer')?>
 </body>
 </html>

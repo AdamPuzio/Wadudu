@@ -19,7 +19,7 @@
  */
 class TicketsController extends AppController {
 	var $name = 'Tickets';
-	var $uses = array();	// No Model
+	var $uses = array('Ticket', 'Workflow');
 	var $components = array('Wadudu');
 
 	function beforeFilter() {
@@ -32,6 +32,14 @@ class TicketsController extends AppController {
 		$projectName = $this->params['project_name'];
 		$Project = $this->Wadudu->determineProject();
 		$ticketId = $this->params['ticket_id'];
+		if(!empty($this->request->data) || !empty($this->request->params['named'])){
+			$update = $this->Ticket->parseRequest($ticketId, $this->request->data, $this->request->params['named']);
+			if($update['success']){
+				$url = $this->Wadudu->buildTicketUrl($ticketId);
+				$this->redirect($url);
+			}	
+		}
+		
 		$Ticket = $this->Ticket->find('first', array(
 			'conditions' => array(
 				'Ticket.id' => $ticketId
@@ -40,8 +48,11 @@ class TicketsController extends AppController {
 			, 'contain' => array(
 				'Reporter', 'Assignee', 'Project', 'TicketType'
 				, 'Comment' => array('User')
+				, 'Tag' => array('User')
 			)
 		));
-		$this->set(compact('projectName', 'Company', 'Project', 'Ticket'));
+		$Workflow = $this->Workflow->getSummary($Project['Project']['workflow_id']);
+		$this->set(compact('projectName', 'Company', 'Project', 'Ticket', 'Workflow'));
+		$this->set('Wadudu', $this->Wadudu);
 	}
 }

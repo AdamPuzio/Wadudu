@@ -1,6 +1,6 @@
 <?php
 /**
- * Projects controller
+ * Workflows controller
  *
  * Wadudu
  * Copyright 2011
@@ -12,21 +12,28 @@
  */
 
 /**
- * Projects controller
+ * Workflows controller
  *
  * @package       wadudu
  * @subpackage    wadudu.cake.libs.controller
  */
-class ProjectsController extends AppController {
-	var $name = 'Projects';
-	var $uses = array('Project');	// No Model
+class WorkflowsController extends AppController {
+	var $name = 'Workflows';
+	var $uses = array('Workflow');
 	var $components = array('Wadudu');
 
 	public function beforeFilter() {
 		parent::beforeFilter();
 	}
+	
+	public function edit($workflowId){
+		$workflow = $this->Workflow->getById($workflowId);
+		$summary = $this->Workflow->getSummary($workflowId);
+		
+		pr($summary);pr($workflow);die();
+	}
 
-	public function index() {
+	/*public function index() {
 		$company = $this->Wadudu->determineCompany();
 		$projectCode = $this->request->params['project_name'];
 		$project = $this->Project->find('first', array(
@@ -54,12 +61,5 @@ class ProjectsController extends AppController {
 		$tickets = $this->Project->getTickets($projectId);
 		$this->set('Tickets', $tickets);
 		$this->set('Wadudu', &$this->Wadudu);
-	}
-	
-	public function _findCompanyByField($field, $value){
-		$company = $this->Project->Company->find('first', array(
-			'conditions' => array('Company.' . $field => $value)
-		));
-		return $company;
-	}
+	}*/
 }

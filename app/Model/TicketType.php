@@ -37,6 +37,7 @@ class TicketType extends AppModel {
  */	
 	var $hasMany = array(
 		'Ticket'
+		, 'TicketState'
 	);
 	
 /**
@@ -56,7 +57,7 @@ class TicketType extends AppModel {
  * @access public
  */	
 	var $hasAndBelongsToMany = array(
-		
+		'Workflow'
 	);
 	
 /**

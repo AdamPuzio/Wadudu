@@ -1,6 +1,6 @@
 <?php
 /**
- * Project Model
+ * Transition Model
  *
  * Wadudu
  * Copyright 2011
@@ -12,19 +12,19 @@
  */
 
 /**
- * Project Model
+ * Transition Model
  *
  * @package       wadudu
  * @subpackage    wadudu.cake.libs.model
  */
-class Project extends AppModel {
+class Transition extends AppModel {
 /**
  * Name
  * 
  * @var string
  * @access public
  */
-	var $name = 'Project';
+	var $name = 'Transition';
 	
 /*
 * Associations
@@ -36,9 +36,7 @@ class Project extends AppModel {
  * @access public
  */	
 	var $hasMany = array(
-		'Ticket' => array(
-			'conditions' => array('Ticket.deleted' => null)
-		)
+		
 	);
 	
 /**
@@ -48,8 +46,11 @@ class Project extends AppModel {
  * @access public
  */	
 	var $belongsTo = array(
-		'Company'
-		, 'Workflow'
+		'TicketState'
+		, 'TransitionTo' => array(
+			'className' => 'TicketState'
+			, 'foreignKey' => 'transition_to_id'
+		)
 	);
 	
 /**
@@ -72,22 +73,5 @@ class Project extends AppModel {
 		
 	);
 	
-	public function getTickets($projectId, $params=array()){
-		$conditions = array(
-			'Ticket.project_id' => $projectId
-		);
-		$limit = 100;
-		$tickets = $this->Ticket->find('all', array(
-			'conditions' => $conditions
-			, 'contain' => array()
-			, 'limit' => $limit
-		));
-		return $tickets;
-	}
 	
-	public function getWorkflow($projectId){
-		$this->id = $projectId;
-		$workflowId = $this->field('workflow_id');
-		return $this->Workflow->getById($workflowId);
-	}
 }
