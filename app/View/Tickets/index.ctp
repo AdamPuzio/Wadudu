@@ -27,15 +27,9 @@ foreach($ticketState['transitions'] as $transition){
 	<?php
 	foreach($ticketType['states'] as $tstate){
 		$class = $tstate['id'] == $ticketStateId ? 'current' : '';
-		if(in_array($tstate['id'], $transList)){
-	?>
-		<li class="<?=$class?>"><a href=""><?=$tstate['name']?></a></li>
-	<?php
-		}else{
 	?>
 		<li class="<?=$class?>"><?=$tstate['name']?></li>
 	<?php
-		}
 	}
 	?>
 	</ul>
